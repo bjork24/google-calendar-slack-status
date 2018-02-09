@@ -1,0 +1,22 @@
+{
+  "name": "gCal to Slack status",
+  "description": "Automatically sync Google Calendar events to your Slack status",
+  "repository": "https://github.com/bjork24/google-calendar-slack-status-test",
+  "logo": "https://i.imgur.com/SPZ97eL.png",
+  "keywords": ["node", "express", "slack"],
+  "success_url": "/",
+  "env": {
+    "SLACK_TOKEN": {
+      "description": "Your Slack user token",
+      "required": true
+    },
+    "SECRET_TOKEN": {
+      "description": "Secret word or phrase",
+      "required": true
+    },
+    "TIME_ZONE": {
+      "description": "What time zone are you working from?",
+      "value": "CST"
+    }
+  }
+}
