@@ -52,6 +52,9 @@ app.post('/end', (req, res, next) => {
     token: process.env.SLACK_TOKEN
   })
   .then((response) => {
+    console.log(incomingStatus)
+    console.log(response)
+    
     if(typeof response.profile !== 'object'){
       throw new Error();
     }
