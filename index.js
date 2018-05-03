@@ -42,6 +42,44 @@ app.post('/', (req, res, next) => {
   res.send('🤘');
 });
 
+app.post('/end', (req, res, next) => {
+  // check for secret token
+  if (!req.body.token || req.body.token !== process.env.SECRET_TOKEN) next();
+  // grab status and clean it up
+  const incomingStatus = req.body.title;
+  // Get current status
+  slack.users.profile.get({
+    token: process.env.SLACK_TOKEN
+  })
+  .then((response) => {
+    console.log(incomingStatus)
+    console.log(response)
+    
+    if(typeof response.profile !== 'object'){
+      throw new Error();
+    }
+    else if (response.profile.status_text !== incomingStatus){
+      return null
+    }
+
+    return slack.users.profile.set({
+      token: process.env.SLACK_TOKEN,
+      profile: JSON.stringify({
+        "status_text": ""
+      })
+    })
+  })
+  .then(() => {
+    res.status(200);
+    res.send('🤘');
+  })
+  .catch(()=> {
+    res.status(500);
+    res.send('error');
+  });
+    
+});
+
 app.get('/', (req, res, next) => {
   // welcome message
   res.send(`
