@@ -14,13 +14,14 @@
       "description": "Secret word or phrase",
       "required": true
     },
-    "TIME_ZONE": {
-      "description": "What time zone are you working from?",
-      "value": "CST"
-    },
     "STATUS_EMOJI": {
       "description": "What emoji would you like? e.g. :rocket: :spiral_calendar_pad:",
       "value": ":spiral_calendar_pad:",
       "required": true
+    },
+    "TIME_ZONE": {
+      "description": "What time zone are you working from?",
+      "value": "CST"
+    }
   }
 }
