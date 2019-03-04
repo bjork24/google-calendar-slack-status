@@ -7,11 +7,19 @@ const moment = require('moment');
 const app = express();
 const port = process.env.PORT || 5000;
 
-app.use(logger('dev'));
+app.use(logger("dev"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 const router = express.Router();
+
+// Body Format:
+// {
+//     "title": "<<<{{Title}}>>>",
+//     "start":"{{Starts}}",
+//     "end":"{{Ends}}",
+//     "token": "xXx"
+// }
 
 app.post('/', (req, res, next) => {
   // check for secret token
@@ -23,6 +31,12 @@ app.post('/', (req, res, next) => {
   const dateFormat = 'MMM D, YYYY [at] hh:mmA';
   const start = moment(req.body.start, dateFormat);
   const end = moment(req.body.end, dateFormat);
+
+  const eightHours = start.add(12, "hours");
+  if (end.isAfter(eightHours)) next(); // Don't include events longer than 12 hours. (all day events)
+
+  const endEpoch = end.unix();
+
   // check for DND
   if (status.includes(dndToken)) {
     slack.dnd.setSnooze({
@@ -35,9 +49,9 @@ app.post('/', (req, res, next) => {
   slack.users.profile.set({
     token: process.env.SLACK_TOKEN,
     profile: JSON.stringify({
-      "status_text": `${status}`,
+      "status_text": `${status} ${process.env.TIME_ZONE}`,
       "status_emoji": ":spiral_calendar_pad:", // Added a standardized emoji since this is for meetings
-      "status_expiration": end.unix() // setting the expiration time for the status
+      "status_expiration": endEpoch // setting the expiration time for the status
     })
   });
   res.status(200);
