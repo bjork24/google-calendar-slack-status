@@ -35,7 +35,8 @@ app.post('/', (req, res, next) => {
   slack.users.profile.set({
     token: process.env.SLACK_TOKEN,
     profile: JSON.stringify({
-      "status_text": `${status} from ${start.format('h:mm')} to ${end.format('h:mm a')} ${process.env.TIME_ZONE}`
+      "status_text": `${status} from ${start.format('h:mm')} to ${end.format('h:mm a')} ${process.env.TIME_ZONE}`,
+      "status_expiration": end.unix() //setting the expiration time for the status
     })
   });
   res.status(200);
