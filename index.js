@@ -26,7 +26,7 @@ app.post('/', (req, res, next) => {
   if (!req.body.token || req.body.token !== process.env.SECRET_TOKEN) next();
   // grab status and clean it up
   let status = req.body.title;
-  const dndToken = ' [DND]';
+  const dndToken = '[DND]';
   // parse event start/stop time
   const dateFormat = 'MMM D, YYYY [at] hh:mmA';
   const start = moment(req.body.start, dateFormat);
@@ -34,8 +34,6 @@ app.post('/', (req, res, next) => {
 
   const twelveHours = start.add(12, "hours");
   if (end.isAfter(twelveHours)) next(); // Don't include events longer than 12 hours. (all day events)
-
-  const endEpoch = end.unix();
 
   // check for DND
   if (status.includes(dndToken)) {
@@ -49,9 +47,9 @@ app.post('/', (req, res, next) => {
   slack.users.profile.set({
     token: process.env.SLACK_TOKEN,
     profile: JSON.stringify({
-      "status_text": `${status} ${process.env.TIME_ZONE}`,
+      "status_text": `${status} ${process.env.TIME_ZONE}`, // the text to be displayed
       "status_emoji": process.env.STATUS_EMOJI, // emoji
-      "status_expiration": endEpoch // setting the expiration time for the status
+      "status_expiration": end.unix() - 360 // setting the expiration time for the status
     })
   });
   res.status(200);
