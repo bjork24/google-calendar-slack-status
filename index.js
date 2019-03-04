@@ -32,8 +32,8 @@ app.post('/', (req, res, next) => {
   const start = moment(req.body.start, dateFormat);
   const end = moment(req.body.end, dateFormat);
 
-  const eightHours = start.add(12, "hours");
-  if (end.isAfter(eightHours)) next(); // Don't include events longer than 12 hours. (all day events)
+  const twelveHours = start.add(12, "hours");
+  if (end.isAfter(twelveHours)) next(); // Don't include events longer than 12 hours. (all day events)
 
   const endEpoch = end.unix();
 
@@ -50,7 +50,7 @@ app.post('/', (req, res, next) => {
     token: process.env.SLACK_TOKEN,
     profile: JSON.stringify({
       "status_text": `${status} ${process.env.TIME_ZONE}`,
-      "status_emoji": ":spiral_calendar_pad:", // Added a standardized emoji since this is for meetings
+      "status_emoji": process.env.STATUS_EMOJI, // emoji
       "status_expiration": endEpoch // setting the expiration time for the status
     })
   });
