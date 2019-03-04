@@ -1,7 +1,7 @@
 {
   "name": "gCal to Slack status",
   "description": "Automatically sync Google Calendar events to your Slack status",
-  "repository": "https://github.com/bjork24/google-calendar-slack-status-test",
+  "repository": "https://github.com/ehatle/google-calendar-slack-status-test",
   "logo": "https://i.imgur.com/SPZ97eL.png",
   "keywords": ["node", "express", "slack"],
   "success_url": "/",
