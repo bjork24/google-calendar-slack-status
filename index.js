@@ -37,7 +37,7 @@ app.post('/', (req, res, next) => {
     profile: JSON.stringify({
       "status_text": `${status} until ${end.format('h:mm a')}`,
       "status_emoji": ":spiral_calendar_pad:", // Added a standardized emoji since this is for meetings
-      "status_expiration": `${end.format('h:mm a')}` // setting the expiration time for the status
+      "status_expiration": end.unix() // setting the expiration time for the status
     })
   });
   res.status(200);
