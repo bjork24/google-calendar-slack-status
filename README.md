@@ -16,9 +16,10 @@ You’ll only need two things to get this up and running:
 2. Give your app a unique name. This will be part of your server’s URL, so make it memorable!  
 3. Paste your Slack user token, which you can find here, into the SLACK_TOKEN field. Choose the workspace you’d like to use, and copy (or generate) the token.  
 4. Put a secret word or phrase in the SECRET_TOKEN field. You might even sprinkle in some emoji if you’re feeling particularly 😏.  
-5. Finally, specify which time zone you’re working from in the TIME_ZONE field. (Fargo is in CST)  
-6. Click the “Deploy App” button and wait for Heroku to do its thing.  
-7. When everything is finished, you should see “Your app was successfully deployed.” and a button to view your newly provisioned app. Click that button.  
+5. Insert whatever emoji you want for your statuses.  
+6. Finally, specify which time zone you’re working from in the TIME_ZONE field. (Fargo is in CST)  
+7. Click the “Deploy App” button and wait for Heroku to do its thing.  
+8. When everything is finished, you should see “Your app was successfully deployed.” and a button to view your newly provisioned app. Click that button.  
 ![server running](https://cdn-images-1.medium.com/max/800/1*_vlOOhgf3f5XLIKG0HRsaw.png)  
 If you see this screen, you’re ready for part 2  
 
