@@ -31,12 +31,7 @@ app.post('/', (req, res, next) => {
   const dateFormat = 'MMM D, YYYY [at] hh:mmA';
   const start = moment(req.body.start, dateFormat);
   const end = moment(req.body.end, dateFormat);
-  let endTime = end.unix();
-  switch(${process.env.TIME_ZONE}) {
-    case "CST": //Central Standard Time is my timezone. Add your own!
-      endTime -= 3600; //set the clock back an hour
-      break;
-  }
+  let endTime = end.unix() - 3600;
 
   const twelveHours = start.add(12, "hours");
   if (end.isAfter(twelveHours)) next(); // Don't include events longer than 12 hours. (all day events)

@@ -2,8 +2,8 @@
 ## What you’ll need ##
 You’ll only need two things to get this up and running:  
 
-* An IFTTT account  
-* A Heroku account  
+* An [IFTTT](ifttt.com) account  
+* A [Heroku](heroku.com) account  
 
 ## How this whole thing is gonna go down ##
 1. You’re gonna set up an account on IFTTT and tell it to monitor Google Calendar.  
@@ -12,7 +12,7 @@ You’ll only need two things to get this up and running:
 
 ### Part 1: Setting up your Node server on Heroku ###
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)  
-1. Deploy this repo to Heroku by clicking the big button that says “Deploy to Heroku.”  
+1. Deploy this repo to Heroku by clicking the big purple button that says “Deploy to Heroku.”  
 2. Give your app a unique name. This will be part of your server’s URL, so make it memorable!  
 3. Paste your Slack user token, which you can find here, into the SLACK_TOKEN field. Choose the workspace you’d like to use, and copy (or generate) the token.  
 4. Put a secret word or phrase in the SECRET_TOKEN field. You might even sprinkle in some emoji if you’re feeling particularly 😏.  
