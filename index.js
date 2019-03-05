@@ -31,6 +31,12 @@ app.post('/', (req, res, next) => {
   const dateFormat = 'MMM D, YYYY [at] hh:mmA';
   const start = moment(req.body.start, dateFormat);
   const end = moment(req.body.end, dateFormat);
+  let endTime = end.unix();
+  switch(${process.env.TIME_ZONE}) {
+    case "CST": //Central Standard Time is my timezone. Add your own!
+      endTime -= 3600; //set the clock back an hour
+      break;
+  }
 
   const twelveHours = start.add(12, "hours");
   if (end.isAfter(twelveHours)) next(); // Don't include events longer than 12 hours. (all day events)
@@ -47,9 +53,9 @@ app.post('/', (req, res, next) => {
   slack.users.profile.set({
     token: process.env.SLACK_TOKEN,
     profile: JSON.stringify({
-      "status_text": `${status} ${process.env.TIME_ZONE}`, // the text to be displayed
+      "status_text": `${status}`, // the text to be displayed
       "status_emoji": process.env.STATUS_EMOJI, // emoji
-      "status_expiration": end.unix() - 360 // setting the expiration time for the status
+      "status_expiration": endTime // setting the expiration time for the status
     })
   });
   res.status(200);
