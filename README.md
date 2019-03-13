@@ -1,5 +1,5 @@
 # Sync your Slack status with G Calendar because nothing is sacred anymore #
-## What you’ll need ##
+_What you’ll need_
 You’ll only need two things to get this up and running:  
 
 * An [IFTTT](ifttt.com) account  

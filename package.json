@@ -13,8 +13,18 @@
     "type": "git",
     "url": "git+https://github.com/ehatle/google-calendar-slack-status.git"
   },
-  "keywords": [],
-  "author": "Dan Chilton <dan.chilton@gmail.com>",
+  "keywords": [
+    "express",
+    "nodejs",
+    "slack",
+    "slack status",
+    "google",
+    "google calendar"
+  ],
+  "authors": [
+    "Dan Chilton <dan.chilton@gmail.com>",
+    "Emil Hatlelid <emilhatlelid@gmail.com>"
+  ],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/ehatle/google-calendar-slack-status/issues"
