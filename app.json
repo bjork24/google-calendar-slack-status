@@ -14,13 +14,9 @@
       "description": "Secret word or phrase",
       "required": true
     },
-    "STATUS_EMOJI": {
-      "description": "What emoji would you like? e.g. 🚀 🗓️",
-      "value": "🗓️",
-    },
     "TIME_ZONE": {
       "description": "What time zone are you working from?",
-      "value": "CST",
+      "value": "CST"
     }
   }
 }
