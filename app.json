@@ -1,13 +1,9 @@
 {
   "name": "gCal to Slack status",
   "description": "Automatically sync Google Calendar events to your Slack status",
-  "keywords": [
-    "node",
-    "express",
-    "slack"
-  ],
   "repository": "https://github.com/ehatle/google-calendar-slack-status",
   "logo": "https://i.imgur.com/SPZ97eL.png",
+  "keywords": ["node", "express", "slack"],
   "success_url": "/",
   "env": {
     "SLACK_TOKEN": {
@@ -19,8 +15,8 @@
       "required": true
     },
     "STATUS_EMOJI": {
-      "description": "What emoji would you like? e.g. :rocket: :spiral_calendar_pad:",
-      "value": ":spiral_calendar_pad:",
+      "description": "What emoji would you like? e.g. 🚀 🗓️",
+      "value": "🗓️",
     },
     "TIME_ZONE": {
       "description": "What time zone are you working from?",

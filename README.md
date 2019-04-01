@@ -61,3 +61,4 @@ For the original, check out the Medium post here: [Syncing your Slack status wit
 
 ## ToDo ##
 * Alter STATUS_EMOJI based on event.
+* Refactor the codebase
