@@ -57,3 +57,7 @@ If you ever need to turn this damn thing off, you can do that by either deactiva
 For the original, check out the Medium post here: [Syncing your Slack status with Google Calendar because nothing is sacred anymore](https://medium.com/@bjork24/syncing-your-slack-status-with-google-calendar-because-nothing-is-sacred-anymore-3032bd171770). Otherwise, click the button below to begin your journey:  
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+
+## ToDo ##
+* Alter STATUS_EMOJI based on event.
