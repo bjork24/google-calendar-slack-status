@@ -31,7 +31,7 @@ app.post('/', (req, res, next) => {
   const dateFormat = 'MMM D, YYYY [at] hh:mmA';
   const start = moment(req.body.start, dateFormat);
   const end = moment(req.body.end, dateFormat);
-  let endTime = end.unix() - 4200; // CST / GMT-6
+  let endTime = end.unix() - 4800; // CST / GMT-6
 
   const twelveHours = start.add(12, "hours");
   if (end.isAfter(twelveHours)) next(); // Don't include events longer than 12 hours. (all day events)
