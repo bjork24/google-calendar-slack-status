@@ -21,10 +21,10 @@
   },
   "homepage": "https://github.com/bjork24/google-calendar-slack-status#readme",
   "dependencies": {
-    "body-parser": "^1.18.2",
-    "express": "^4.16.2",
-    "moment": "^2.20.1",
+    "body-parser": "^1.19.0",
+    "express": "^4.16.4",
+    "moment": "^2.24.0",
     "morgan": "^1.9.1",
-    "slack": "^10.1.1"
+    "slack": "^11.0.2"
   }
 }

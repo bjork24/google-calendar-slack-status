@@ -18,7 +18,7 @@ app.post('/', (req, res, next) => {
   if (!req.body.token || req.body.token !== process.env.SECRET_TOKEN) next();
   // grab status and clean it up
   let status = req.body.title;
-  const dndToken = ' [DND]';
+  const dndToken = '[DND]';
   // parse event start/stop time
   const dateFormat = 'MMM D, YYYY [at] hh:mmA';
   const start = moment(req.body.start, dateFormat);
