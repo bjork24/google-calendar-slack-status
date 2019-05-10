@@ -4,7 +4,7 @@
   "description": "Automatically sync your Google Calendar events to your Slack status",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon -r dotenv/config index.js"
   },
   "engines": {
     "node": "8.9.4"
@@ -22,9 +22,15 @@
   "homepage": "https://github.com/bjork24/google-calendar-slack-status#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "emoji-regex": "^8.0.0",
     "express": "^4.16.4",
     "moment": "^2.24.0",
     "morgan": "^1.9.1",
+    "node-emoji": "^1.10.0",
     "slack": "^11.0.2"
+  },
+  "devDependencies": {
+    "dotenv": "^8.0.0",
+    "nodemon": "^1.19.0"
   }
 }
