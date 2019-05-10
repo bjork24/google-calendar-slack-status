@@ -55,14 +55,16 @@ app.post('/', (req, res, next) => {
     status = status.replace(awayToken, '').trim();
   }
   // set status
+  status = `${status} from ${start.format('h:mm')} to ${end.format('h:mm a')} ${process.env.TIME_ZONE}`;
   slack.users.profile.set({
     token: process.env.SLACK_TOKEN,
     profile: JSON.stringify({
-      "status_text": `${status} from ${start.format('h:mm')} to ${end.format('h:mm a')} ${process.env.TIME_ZONE}`,
+      "status_text": status,
       "status_emoji": statusEmoji,
       "status_expiration": end.unix()
     })
   });
+  console.log(`Status set as "${status}" and will expire at ${end.format('h:mm a')}`);
   res.status(200);
   res.send('🤘');
 });
