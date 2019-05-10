@@ -21,6 +21,8 @@ app.post('/', (req, res, next) => {
     next();
     return;
   }
+  // log some stuff for dev
+  console.log(req.body);
   // grab status and emojis and clean it up
   let status = req.body.title;
   let statusEmoji = nodeEmoji.unemojify('💬');
