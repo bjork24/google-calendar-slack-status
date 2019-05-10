@@ -21,13 +21,15 @@ app.post('/', (req, res, next) => {
     next();
     return;
   }
+  // store token
+  const token = process.env.SLACK_TOKEN;
   // log some stuff for dev
   console.log(req.body);
   // grab status and emojis and clean it up
   let status = req.body.title;
   let statusEmoji = nodeEmoji.unemojify('💬');
   const statusHasEmoji = emojiRegex().exec(status);
-  if (statusHasEmoji) {
+  if (nodeEmoji.hasEmoji(statusHasEmoji[0])) {
     statusEmoji = nodeEmoji.unemojify(statusHasEmoji[0]);
     status = nodeEmoji.strip(status);
   }
@@ -41,14 +43,14 @@ app.post('/', (req, res, next) => {
   // check for DND
   if (status.includes(dndToken)) {
     slack.dnd.setSnooze({
-      token: process.env.SLACK_TOKEN,
+      token,
       num_minutes: end.diff(start, 'minutes')
     });
     status = status.replace(dndToken, '').trim();
   }
   // check for AWAY
   slack.users.setPresence({
-    token: process.env.SLACK_TOKEN,
+    token,
     presence: status.includes(awayToken) ? 'away' : 'auto'
   });
   if (status.includes(awayToken)) {
@@ -56,14 +58,13 @@ app.post('/', (req, res, next) => {
   }
   // set status
   status = `${status} from ${start.format('h:mm')} to ${end.format('h:mm a')} ${process.env.TIME_ZONE}`;
-  slack.users.profile.set({
-    token: process.env.SLACK_TOKEN,
-    profile: JSON.stringify({
-      "status_text": status,
-      "status_emoji": statusEmoji,
-      "status_expiration": end.unix()
-    })
+  let profile = JSON.stringify({
+    "status_text": status,
+    "status_emoji": statusEmoji,
+    "status_expiration": end.unix()
   });
+  console.log(profile);
+  slack.users.profile.set({ token, profile });
   console.log(`Status set as "${status}" and will expire at ${end.format('h:mm a')}`);
   res.status(200);
   res.send('🤘');
