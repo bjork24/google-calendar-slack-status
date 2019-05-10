@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
+const emojiRegex = require('emoji-regex/text.js');
+const nodeEmoji = require('node-emoji');
 const slack = require('slack');
 const moment = require('moment');
 
@@ -15,10 +17,21 @@ const router = express.Router();
 
 app.post('/', (req, res, next) => {
   // check for secret token
-  if (!req.body.token || req.body.token !== process.env.SECRET_TOKEN) next();
-  // grab status and clean it up
+  if (!req.body.token || req.body.token !== process.env.SECRET_TOKEN) {
+    next();
+    return;
+  }
+  // grab status and emojis and clean it up
   let status = req.body.title;
-  const dndToken = ' [DND]';
+  let statusEmoji = nodeEmoji.unemojify('💬');
+  const statusHasEmoji = emojiRegex().exec(status);
+  if (statusHasEmoji) {
+    statusEmoji = nodeEmoji.unemojify(statusHasEmoji[0]);
+    status = nodeEmoji.strip(status);
+  }
+  // additional tokens
+  const dndToken = '[DND]';
+  const awayToken = '[AWAY]';
   // parse event start/stop time
   const dateFormat = 'MMM D, YYYY [at] hh:mmA';
   const start = moment(req.body.start, dateFormat);
@@ -29,13 +42,23 @@ app.post('/', (req, res, next) => {
       token: process.env.SLACK_TOKEN,
       num_minutes: end.diff(start, 'minutes')
     });
-    status = status.replace(dndToken, '');
+    status = status.replace(dndToken, '').trim();
+  }
+  // check for AWAY
+  slack.users.setPresence({
+    token: process.env.SLACK_TOKEN,
+    presence: status.includes(awayToken) ? 'away' : 'auto'
+  });
+  if (status.includes(awayToken)) {
+    status = status.replace(awayToken, '').trim();
   }
   // set status
   slack.users.profile.set({
     token: process.env.SLACK_TOKEN,
     profile: JSON.stringify({
-      "status_text": `${status} from ${start.format('h:mm')} to ${end.format('h:mm a')} ${process.env.TIME_ZONE}`
+      "status_text": `${status} from ${start.format('h:mm')} to ${end.format('h:mm a')} ${process.env.TIME_ZONE}`,
+      "status_emoji": statusEmoji,
+      "status_expiration": end.unix()
     })
   });
   res.status(200);
