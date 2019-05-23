@@ -29,7 +29,7 @@ app.post('/', (req, res, next) => {
   let status = req.body.title;
   let statusEmoji = nodeEmoji.unemojify('💬');
   const statusHasEmoji = emojiRegex().exec(status);
-  if (nodeEmoji.hasEmoji(statusHasEmoji[0])) {
+  if (statusHasEmoji) {
     statusEmoji = nodeEmoji.unemojify(statusHasEmoji[0]);
     status = nodeEmoji.strip(status);
   }
