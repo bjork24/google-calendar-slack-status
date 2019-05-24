@@ -27,7 +27,7 @@ app.post('/', (req, res, next) => {
   console.log(req.body);
   // grab status and emojis and clean it up
   let status = req.body.title;
-  let statusEmoji = nodeEmoji.unemojify('💬');
+  let statusEmoji = nodeEmoji.unemojify('🗓');
   const statusHasEmoji = emojiRegex().exec(status);
   if (statusHasEmoji) {
     statusEmoji = nodeEmoji.unemojify(statusHasEmoji[0]);
