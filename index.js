@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
-const emojiRegex = require('emoji-regex/text.js');
+const emojiRegex = require('emoji-regex');
 const nodeEmoji = require('node-emoji');
 const slack = require('slack');
 const moment = require('moment');
@@ -31,6 +31,7 @@ app.post('/', (req, res, next) => {
   const statusHasEmoji = emojiRegex().exec(status);
   if (statusHasEmoji) {
     statusEmoji = nodeEmoji.unemojify(statusHasEmoji[0]);
+    console.log(`CUSTOM EMOJI! ${statusEmoji}`);
     status = nodeEmoji.strip(status);
   }
   // additional tokens
