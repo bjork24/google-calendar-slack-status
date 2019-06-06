@@ -4,7 +4,7 @@ const logger = require('morgan');
 const emojiRegex = require('emoji-regex');
 const nodeEmoji = require('node-emoji');
 const slack = require('slack');
-const moment = require('moment');
+const moment = require('moment-timezone');
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -39,8 +39,8 @@ app.post('/', (req, res, next) => {
   const awayToken = '[AWAY]';
   // parse event start/stop time
   const dateFormat = 'MMM D, YYYY [at] hh:mmA';
-  const start = moment(req.body.start, dateFormat);
-  const end = moment(req.body.end, dateFormat);
+  const start = moment.tz(req.body.start, dateFormat, process.env.TIME_ZONE);
+  const end = moment.tz(req.body.end , dateFormat, process.env.TIME_ZONE);
   // check for DND
   if (status.includes(dndToken)) {
     slack.dnd.setSnooze({
