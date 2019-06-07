@@ -21,6 +21,7 @@ app.post('/', (req, res, next) => {
     next();
     return;
   }
+  console.log(req.body);
   // store token
   const token = process.env.SLACK_TOKEN;
   // log some stuff for dev
