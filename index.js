@@ -41,7 +41,7 @@ app.post('/', (req, res, next) => {
   // parse event start/stop time
   const dateFormat = 'MMM D, YYYY [at] hh:mmA';
   const start = moment.tz(req.body.start, dateFormat, process.env.TIME_ZONE);
-  const end = moment.tz(req.body.end , dateFormat, process.env.TIME_ZONE);
+  const end = moment.tz(req.body.end, dateFormat, process.env.TIME_ZONE);
   // check for DND
   if (status.includes(dndToken)) {
     slack.dnd.setSnooze({
