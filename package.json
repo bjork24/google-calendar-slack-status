@@ -24,7 +24,7 @@
     "body-parser": "^1.19.0",
     "emoji-regex": "^8.0.0",
     "express": "^4.16.4",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "morgan": "^1.9.1",
     "node-emoji": "^1.10.0",
     "slack": "^11.0.2"
